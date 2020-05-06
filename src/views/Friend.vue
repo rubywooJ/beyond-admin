@@ -298,6 +298,7 @@
 <script>
     import Navigation from "../components/Navigation";
     import Bottom from "../components/Bottom";
+    import linkApi from "../api/link";
 
 
     export default {
@@ -357,73 +358,46 @@
                 this.frienddescription = description;
             },
             getFriends() {
-                this.$axios({
-                    method: "get",
-                    url: "/links",
-                })
+                linkApi.listAll()
                     .then(links => {
                         // console.log(links.data.data);
                         this.frilists = links.data.data;
                     })
-                    .catch(error => {
-                        alert("链接获取失败！");
-                    });
             },
             postFriends() {
-                this.$axios({
-                    method: "post",
-                    url: "/links",
-                    data: {
-                        name: this.fridsname,
-                        url: this.fridslink,
-                        img: this.fridslogo,
-                        team: this.fridsteam,
-                        description: this.fridsdes,
-                    }
+                linkApi.create({
+                    name: this.fridsname,
+                    url: this.fridslink,
+                    img: this.fridslogo,
+                    team: this.fridsteam,
+                    description: this.fridsdes,
                 })
                     .then(response => {
                         // console.log(response.data.data);
                         this.getFriends();
                     })
-                    .catch(error => {
-                        alert("标签创建失败！");
-                    });
             },
             putReFrids() {
-                this.$axios({
-                    method: "put",
-                    url: "/links/" + this.friendId,
-                    data: {
-                        id: this.friendId,
-                        name: this.friendname,
-                        url: this.friendurl,
-                        img: this.friendimg,
-                        team: this.friendteam,
-                        description: this.frienddescription,
-                    }
+                linkApi.update(this.friendId, {
+                    id: this.friendId,
+                    name: this.friendname,
+                    url: this.friendurl,
+                    img: this.friendimg,
+                    team: this.friendteam,
+                    description: this.frienddescription,
                 })
                     .then(response => {
                         // console.log(response.data.data);
                         this.getFriends();
                     })
-                    .catch(error => {
-                        alert("更新链接失败！");
-                    });
             },
             deleFrids() {
-                this.$axios({
-                    method: "delete",
-                    url: "/links/" + this.friendId,
-                })
+                linkApi.delete(this.friendId)
                     .then(response => {
                         // console.log(response.data.data);
                         this.getFriends();
                     })
-                    .catch(error => {
-                        alert("删除链接失败！");
-                    });
             },
-
         }
     };
 </script>

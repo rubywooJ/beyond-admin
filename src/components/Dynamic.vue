@@ -95,7 +95,8 @@
 </template>
 
 <script>
-    import {formatDate} from '@/js/transDate.js'
+    import {formatDate} from '@/util/transDate'
+    import articleApi from "../api/article";
 
 
     export default {
@@ -117,17 +118,11 @@
         },
         methods: {
             getDynamic() {
-                this.$axios({
-                    method: "get",
-                    url: "/articles"
-                })
+                articleApi.getAll(1, 5)
                     .then(dynamic => {
                         // console.log(dynamic.data);
                         this.lists = dynamic.data.data.content;
                     })
-                    .catch(error => {
-                        alert("动态获取失败！");
-                    });
             },
         }
     };

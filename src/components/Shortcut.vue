@@ -30,6 +30,8 @@
 </template>
 
 <script>
+    import adminApi from "../api/admin";
+
     export default {
         name: 'Shortcut',
         data() {
@@ -47,20 +49,13 @@
         },
         methods: {
             getBloginfo() {
-                this.$axios({
-                    method: "get",
-                    url: "/info"
+                adminApi.blogInfo().then(blogCount => {
+                    // console.log(blogCount.data);
+                    this.articlesnum = blogCount.data.data.articleCount;
+                    this.friendsnum = blogCount.data.data.linkCount;
+                    this.commentsnum = blogCount.data.data.commentCount;
+                    this.visitednum = blogCount.data.data.visitedCount;
                 })
-                    .then(blogCount => {
-                        // console.log(blogCount.data);
-                        this.articlesnum = blogCount.data.data.articleCount;
-                        this.friendsnum = blogCount.data.data.linkCount;
-                        this.commentsnum = blogCount.data.data.commentCount;
-                        this.visitednum = blogCount.data.data.visitedCount;
-                    })
-                    .catch(error => {
-                        alert("博客信息获取失败！");
-                    });
             },
         },
 

@@ -177,6 +177,7 @@
 <script>
     import Navigation from "../components/Navigation";
     import Bottom from "../components/Bottom";
+    import adminApi from "../api/admin";
 
     export default {
         name: "Personal",
@@ -203,20 +204,16 @@
                 this.display2 = true;
             },
             postPassword() {
-                this.$axios({
-                    method: "post",
-                    url: "/user/restPassword",
-                    data: {
-                        confirmPassword: this.newpassword2,
-                        newPassword: this.newpassword1,
-                        oldPassword: this.oldpassword
-                    }
+                adminApi.resetPassword({
+                    confirmPassword: this.newpassword2,
+                    newPassword: this.newpassword1,
+                    oldPassword: this.oldpassword
                 })
                     .then(response => {
+                        adminApi.logout();
+                        this.$message.warning('登录状态已失效，请重新登录！')
                     })
-                    .catch(error => {
-                        alert("密码修改失败！");
-                    });
+
             },
         }
     };

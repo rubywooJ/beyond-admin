@@ -217,7 +217,7 @@
 </template>
 
 <script>
-    import {formatDate} from "@/js/transDate.js";
+    import {formatDate} from "@/util/transDate.js";
     import Navigation from "../components/Navigation";
     import Bottom from "../components/Bottom";
 

@@ -1,9 +1,9 @@
 <template>
     <div class="navigation">
         <div class="navlittle">
-            <!-- <router-link to="/test"> -->
+             <router-link to="/HomePage">
             <span class="logo">Beyond</span>
-            <!-- </router-link> -->
+             </router-link>
         </div>
         <div class="navlittle">
             <router-link to="/HomePage">
@@ -99,28 +99,22 @@
 </template>
 
 <script>
+    import adminApi from "../api/admin";
+    import articleApi from "../api/article";
+
     export default {
         data() {
             return {};
         },
         methods: {
             getPersonal() {
-                this.$axios({
-                    method: "get",
-                    url: "/user/info"
-                })
+                adminApi.userInfo()
                     .then(response => {
                         console.log(response.data);
                     })
-                    .catch(error => {
-                        alert("信息获取失败！");
-                    });
             },
             getArticles() {
-                this.$axios({
-                    method: "get",
-                    url: "/articles"
-                })
+                articleApi.getAll(1, 5)
                     .then(response => {
                         console.log(response.data);
                     })
@@ -129,40 +123,41 @@
                     });
             },
             postLogin() {
-                this.$axios({
-                    method: "post",
-                    url: "/logout",
-                })
-                    .then(response => {
-                        this.$router.push('/Login');
-                    })
-                    .catch(error => {
-                        alert("退出登录失败！");
-                    });
+                this.$confirm('即将推出登录, 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    adminApi.logout()
+                        .then(response => {
+                            this.$router.push('/Login');
+                        });
+                    //TODO 退出登录 清空cookie localStorage
+                }).catch(()=>{});
             },
             postRestart() {
-                this.$axios({
-                    method: "post",
-                    url: "/beyond-restart",
-                })
-                    .then(response => {
+                this.$confirm('即将重启, 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    adminApi.refreshToken().then(response => {
                         this.$router.push('/Login');
                     })
-                    .catch(error => {
-                        alert("重启失败！");
-                    });
+                }).catch(()=>{});
+
             },
             postShutdown() {
-                this.$axios({
-                    method: "post",
-                    url: "/beyond-shutdown",
-                })
-                    .then(response => {
-                        this.$router.push('/Login');
-                    })
-                    .catch(error => {
-                        alert("关闭应用失败！");
-                    });
+                this.$confirm('即将关闭, 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    adminApi.shutdownApp()
+                        .then(response => {
+                            this.$router.push('/Login');
+                        })
+                }).catch(()=>{});
             },
         }
     };

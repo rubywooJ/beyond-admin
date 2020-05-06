@@ -380,9 +380,11 @@
 </template>
 
 <script>
-    import {formatDate} from "@/js/transDate.js";
+    import {formatDate} from "@/util/transDate";
     import Navigation from "../components/Navigation";
     import Bottom from "../components/Bottom";
+    import articleApi from "../api/article";
+    import tagApi from "../api/tag";
 
     export default {
         name: "Article",
@@ -460,35 +462,37 @@
                 // console.log(m.tags);
             },
             getArticles() {
-                this.$axios({
-                    method: "get",
-                    url: "/articles"
-                })
+                articleApi.getAll(1, 10)
                     .then(articles => {
                         // console.log(articles.data.data.content);
                         this.artlists = articles.data.data.content;
                     })
-                    .catch(error => {
-                        alert("动态获取失败！");
-                    });
             },
             //根据id查找文章
             getIdArticles() {
-                this.$axios({
-                    method: "get",
-                    url: "/articles/" + this.artid
-                })
+                articleApi.getOne(this.artsId)
                     .then(response => {
                         // console.log(response.data);
                         this.artIdlists = response.data.data;
                         this.justId = response.data;
                     })
                     .catch(error => {
-                        alert("未查询到此id下的文章！");
+                        this.$message.error("未查询到此id下的文章！")
                     });
                 // this.$router.go(0);
             },
             putArticles() {
+
+                this.$alert('暂无法修改文章', '提示', {
+                    confirmButtonText: '确定',
+                    // callback: action => {
+                    //     this.$message({
+                    //         type: 'info',
+                    //         message: `action: ${ action }`
+                    //     });
+                    // }
+                });
+                return;
                 this.$axios({
                     method: "put",
                     url: "/articles/" + this.artsId,
@@ -517,32 +521,20 @@
                     });
             },
             deleArticles() {
-                this.$axios({
-                    method: "delete",
-                    url: "/articles/" + this.artsId
-                })
+                articleApi.delete(this.artsId)
                 // alert("确认删除此文章？")
                     .then(response => {
                         alert("删除成功！");
                         // console.log(response.data.data);
                         this.getArticles();
                     })
-                    .catch(error => {
-                        alert("删除失败！");
-                    });
             },
             getTags() {
-                this.$axios({
-                    method: "get",
-                    url: "/tags"
-                })
+                tagApi.getAll()
                     .then(tags => {
                         // console.log(tags.data.data);
                         this.edtaglists = tags.data.data;
                     })
-                    .catch(error => {
-                        alert("标签获取失败！");
-                    });
             }
             // getIdTag() {
             //   this.$axios({

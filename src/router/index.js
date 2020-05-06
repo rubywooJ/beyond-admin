@@ -13,7 +13,7 @@ import Comment from '../views/Comment.vue'
 import Setting from '../views/Setting.vue'
 import referArticle from '../views/referArticle.vue'
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
     {

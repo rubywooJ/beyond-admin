@@ -200,6 +200,7 @@
 <script>
     import Navigation from "../components/Navigation";
     import Bottom from "../components/Bottom";
+    import tagApi from "../api/tag";
 
 
     export default {
@@ -233,33 +234,19 @@
             },
             //获取全部标签
             getTags() {
-                this.$axios({
-                    method: "get",
-                    url: "/tags",
-                })
+                tagApi.getAll()
                     .then(tags => {
                         // console.log(tags);
                         this.taglists = tags.data.data;
                     })
-                    .catch(error => {
-                        alert("标签获取失败！");
-                    });
             },
             //创建新标签
             postTags() {
-                this.$axios({
-                    method: "post",
-                    url: "/tags",
-                    data: {
-                        name: this.tagsname1
-                    }
+                tagApi.addOne({
+                    name: this.tagsname1
+                }).then(response => {
+                    this.getTags();
                 })
-                    .then(response => {
-                        this.getTags();
-                    })
-                    .catch(error => {
-                        alert("标签创建失败！");
-                    });
             },
             //获取单个标签id
             getTagsId(i, j) {
@@ -269,37 +256,22 @@
             },
             //更新标签
             putReTags() {
-                this.$axios({
-                    method: "put",
-                    url: "/tags/" + this.tagsId,
-                    data: {
-                        id: this.tagsId,
-                        name: this.retagsname,
-                    }
-                })
-                    .then(response => {
+                tagApi.updateOne(this.tagsId, {
+                    id: this.tagsId,
+                    name: this.retagsname,
+                }).then(response => {
                         console.log(response.data.data);
                         // this.retags = response.data.data;
                         this.getTags();
                     })
-                    .catch(error => {
-                        alert("更新标签失败！");
-                    });
             },
             //删除标签
             deleTags() {
-                this.$axios({
-                    method: "delete",
-                    url: "/tags/" + this.tagsId,
-                })
+                tagApi.deleteOne(this.tagsId)
                     .then(response => {
                         console.log(response.data.data);
                         this.getTags();
                     })
-                    .catch(error => {
-                        console.log(error);
-                        alert("删除标签失败！");
-                    });
             },
 
         }
