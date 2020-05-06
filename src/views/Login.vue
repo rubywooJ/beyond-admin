@@ -100,9 +100,9 @@
                     <input
                             class="user"
                             type="text"
-                            placeholder="用户名/邮箱"
+                            placeholder="测试用户名/邮箱 beyond"
                             onfocus="this.placeholder=''"
-                            onblur="this.placeholder='用户名/邮箱'"
+                            onblur="this.placeholder='测试用户名/邮箱 beyond'"
                             v-model="ruleForm.username"
                     />
                 </div>
@@ -111,9 +111,9 @@
                     <input
                             class="code"
                             type="password"
-                            placeholder="密码..."
+                            placeholder="测试密码 123456"
                             onfocus="this.placeholder=''"
-                            onblur="this.placeholder='密码'"
+                            onblur="this.placeholder='密码123456'"
                             v-model="ruleForm.password"
                     />
                     <el-checkbox class="paswd" v-model="checked">记住密码</el-checkbox>

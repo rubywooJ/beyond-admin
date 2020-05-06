@@ -492,33 +492,32 @@
                     //     });
                     // }
                 });
-                return;
-                this.$axios({
-                    method: "put",
-                    url: "/articles/" + this.artsId,
-                    data: {
-                        author: this.single.author,
-                        content: this.single.content,
-                        contentMd: this.single.contenMd,
-                        cover: this.single.cover,
-                        createTime: this.single.createTime,
-                        editTime: 0,
-                        id: this.single.id,
-                        origin: this.single.origin,
-                        state: this.single.state,
-                        summary: this.single.summary,
-                        tags: this.single.tags,
-                        title: this.single.title,
-                        type: this.single.type,
-                        views: this.single.views
-                    }
-                })
-                    .then(response => {
-                        // console.log(response.data.data);
-                    })
-                    .catch(error => {
-                        alert("修改文章失败！");
-                    });
+                // this.$axios({
+                //     method: "put",
+                //     url: "/articles/" + this.artsId,
+                //     data: {
+                //         author: this.single.author,
+                //         content: this.single.content,
+                //         contentMd: this.single.contenMd,
+                //         cover: this.single.cover,
+                //         createTime: this.single.createTime,
+                //         editTime: 0,
+                //         id: this.single.id,
+                //         origin: this.single.origin,
+                //         state: this.single.state,
+                //         summary: this.single.summary,
+                //         tags: this.single.tags,
+                //         title: this.single.title,
+                //         type: this.single.type,
+                //         views: this.single.views
+                //     }
+                // })
+                //     .then(response => {
+                //         // console.log(response.data.data);
+                //     })
+                //     .catch(error => {
+                //         alert("修改文章失败！");
+                //     });
             },
             deleArticles() {
                 articleApi.delete(this.artsId)

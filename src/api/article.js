@@ -24,7 +24,7 @@ articleApi.getOne = id =>{
 //发布一个新的文章
 articleApi.add = (article) => {
   return service({
-    url: `${baseUrl}/add`,
+    url: `${baseUrl}`,
     data: article,
     type: 'json',
     method: `post`

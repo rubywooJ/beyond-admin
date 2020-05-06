@@ -108,7 +108,7 @@
                 ></el-input>
             </div>
             <div class="edat edselect">
-                <el-checkbox-group v-model="checkboxGroup" style="margin: 20px;">
+                <el-checkbox-group v-model="tags" style="margin: 20px;">
                     <el-checkbox v-for="(tags, i) in taglists" :label="tags" :key="i" class="edseli">
                         <span class="chebtn">{{tags.name}}</span>
                     </el-checkbox>
@@ -129,6 +129,8 @@
 <script>
     import Navigation from "../components/Navigation";
     import Bottom from "../components/Bottom";
+    import articleApi from "../api/article";
+    import tagApi from "../api/tag";
 
     export default {
         name: "editArticle",
@@ -140,7 +142,7 @@
             return {
                 input1: "",
                 input2: "",
-                checkboxGroup: [],
+                tags: [],
                 taglists: [],
                 author: "往事随风",
                 tagname: ""
@@ -151,49 +153,35 @@
         },
         methods: {
             postArticles() {
-                this.$axios({
-                    method: "post",
-                    url: "/articles",
-                    data: {
-                        author: this.author,
-                        title: this.input1,
-                        content: this.input2,
-                        origin: "",
-                        contentMd: "",
-                        cover: "",
-                        createTime: 0,
-                        editTime: 0,
-                        state: "",
-                        summary: "",
-                        tags: [{
-                            id: 45,
-                            name: "1"
-                        }],
-                        type: 0,
-                        views: 0
-                    }
+                this.tags.forEach(t =>{
+                    delete t.articleCount;
+                });
+
+                articleApi.add({
+                    author: this.author,
+                    title: this.input1,
+                    content: this.input2,
+                    origin: "",
+                    contentMd: "",
+                    cover: "",
+                    state: "",
+                    summary: "",
+                    tags: this.tags,
+                    type: 0,
+                    views: 0
                 })
                     .then(articles => {
                         // console.log(articles.data.data.content);
-                        alert("文章发布成功！")
+                        this.$message.info("文章发布成功！");
                         this.$router.go(0);
                     })
-                    .catch(error => {
-                        alert("文章发表失败！");
-                    });
             },
             getTags() {
-                this.$axios({
-                    method: "get",
-                    url: "/tags"
-                })
+                tagApi.getAll()
                     .then(tags => {
                         // console.log(tags.data.data);
                         this.taglists = tags.data.data;
                     })
-                    .catch(error => {
-                        alert("标签获取失败！");
-                    });
             }
         }
     };

@@ -136,28 +136,34 @@
                 }).catch(()=>{});
             },
             postRestart() {
-                this.$confirm('即将重启, 是否继续?', '提示', {
-                    confirmButtonText: '确定',
-                    cancelButtonText: '取消',
-                    type: 'warning'
-                }).then(() => {
-                    adminApi.refreshToken().then(response => {
-                        this.$router.push('/Login');
-                    })
-                }).catch(()=>{});
+                this.$alert('暂不开放', '提示', {
+                    confirmButtonText: '确定'
+                });
+                // this.$confirm('即将重启, 是否继续?', '提示', {
+                //     confirmButtonText: '确定',
+                //     cancelButtonText: '取消',
+                //     type: 'warning'
+                // }).then(() => {
+                //     adminApi.refreshToken().then(response => {
+                //         this.$router.push('/Login');
+                //     })
+                // }).catch(()=>{});
 
             },
             postShutdown() {
-                this.$confirm('即将关闭, 是否继续?', '提示', {
-                    confirmButtonText: '确定',
-                    cancelButtonText: '取消',
-                    type: 'warning'
-                }).then(() => {
-                    adminApi.shutdownApp()
-                        .then(response => {
-                            this.$router.push('/Login');
-                        })
-                }).catch(()=>{});
+                this.$alert('暂不开放', '提示', {
+                    confirmButtonText: '确定'
+                });
+                // this.$confirm('即将关闭, 是否继续?', '提示', {
+                //     confirmButtonText: '确定',
+                //     cancelButtonText: '取消',
+                //     type: 'warning'
+                // }).then(() => {
+                //     adminApi.shutdownApp()
+                //         .then(response => {
+                //             this.$router.push('/Login');
+                //         })
+                // }).catch(()=>{});
             },
         }
     };
