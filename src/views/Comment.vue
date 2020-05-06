@@ -1,46 +1,49 @@
 <style scope>
-.Comment {
-  background-color: #eff2f5;
-}
-.combody {
-  min-height: 82vh;
-}
-.arthead {
-  width: 100%;
-  height: 35px;
-  background-color: #fff;
-}
-.arthead .artspan {
-  padding: 10px 20px;
-}
+    .Comment {
+        background-color: #eff2f5;
+    }
+
+    .combody {
+        min-height: 82vh;
+    }
+
+    .arthead {
+        width: 100%;
+        height: 35px;
+        background-color: #fff;
+    }
+
+    .arthead .artspan {
+        padding: 10px 20px;
+    }
 </style>
 
 <template>
-  <div class="Comment">
-    <Navigation />
-    <div class="arthead">
-      <el-breadcrumb separator-class="el-icon-arrow-right" class="artspan">
-        <el-breadcrumb-item :to="{ path: '/HomePage' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item>评论</el-breadcrumb-item>
-      </el-breadcrumb>
+    <div class="Comment">
+        <Navigation/>
+        <div class="arthead">
+            <el-breadcrumb separator-class="el-icon-arrow-right" class="artspan">
+                <el-breadcrumb-item :to="{ path: '/HomePage' }">首页</el-breadcrumb-item>
+                <el-breadcrumb-item>评论</el-breadcrumb-item>
+            </el-breadcrumb>
+        </div>
+        <div class="combody"></div>
+
+
+        <Bottom/>
     </div>
-    <div class="combody"></div>
-
-
-    <Bottom />
-  </div>
 </template>
 
 <script>
-import Navigation from "../components/Navigation";
-import Bottom from "../components/Bottom";
+    import Navigation from "../components/Navigation";
+    import Bottom from "../components/Bottom";
 
-export default {
-  name: 'Comment',
-  components: {
-    Navigation,
-    Bottom,
-  }
-}
+    export default {
+        name: 'Comment',
+        components: {
+            Navigation,
+            Bottom,
+        }
+    }
 </script>
 
