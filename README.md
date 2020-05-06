@@ -1,4 +1,5 @@
-# jiang
+# Beyond admin 
+> Background management of [beyond blog](https://github.com/rubywooJ/beyond-admin)
 
 ## Project setup
 ```
