@@ -25,8 +25,6 @@
         font-size: 13px;
         color: #8c8c8c;
         padding-top: 15px;
-        position: absolute;
-        bottom: 0px;
     }
 
     .bottom a {
