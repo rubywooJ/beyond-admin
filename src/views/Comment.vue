@@ -1,6 +1,7 @@
 <style scope>
 .Comment {
   background-color: #eff2f5;
+  min-width: 820px;
 }
 
 .combody {
@@ -31,7 +32,22 @@
             <el-breadcrumb-item>评论</el-breadcrumb-item>
           </el-breadcrumb>
         </div>
-        <div class="combody"></div>
+        <div class="combody">
+          <el-row :gutter="10">
+            <el-col :xs="6" :sm="6" :md="4" :lg="6" :xl="1">
+              <div class="grid-content bg-purple">1</div>
+            </el-col>
+            <el-col :xs="6" :sm="6" :md="4" :lg="6" :xl="11">
+              <div class="grid-content bg-purple-light">2</div>
+            </el-col>
+            <el-col :xs="6" :sm="6" :md="4" :lg="6" :xl="11">
+              <div class="grid-content bg-purple">3</div>
+            </el-col>
+            <el-col :xs="6" :sm="6" :md="4" :lg="6" :xl="1">
+              <div class="grid-content bg-purple-light">4</div>
+            </el-col>
+          </el-row>
+        </div>
       </el-main>
       <el-footer>
         <Bottom />

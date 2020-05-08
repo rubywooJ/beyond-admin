@@ -1,6 +1,7 @@
 <style scope>
 .Setting {
   background-color: #eff2f5;
+  min-width: 820px;
 }
 </style>
 <template>

@@ -2,6 +2,7 @@
 .Personal {
   height: 100%;
   background-color: #eff2f5;
+  min-width: 820px;
 }
 
 .perContent {

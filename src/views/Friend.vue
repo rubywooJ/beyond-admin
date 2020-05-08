@@ -1,6 +1,7 @@
 <style scope>
 .Friend {
   background-color: #eff2f5;
+  min-width: 820px;
 }
 
 .fripage {
@@ -144,6 +145,7 @@
   border: 1px solid #ddd;
   border-radius: 3px;
   color: #8c8c8c;
+  width: 90%;
 }
 
 .fripage .sortfriends .frilist .fieth {
@@ -210,7 +212,7 @@
             <span>描述：</span>
             <br />
             <br />
-            <textarea name class="fridescription" cols="64" rows="5" v-model="fridsdes"></textarea>
+            <textarea class="fridescription" v-model="fridsdes"></textarea>
             <br />
             <br />
             <button class="save" v-on:click="postFriends()">保存</button>
@@ -250,7 +252,7 @@
             <span>描述：</span>
             <br />
             <br />
-            <textarea name class="fridescription" cols="64" rows="5" v-model="frienddescription"></textarea>
+            <textarea name class="fridescription" v-model="frienddescription"></textarea>
             <br />
             <br />
             <button class="save" v-on:click="putReFrids()">保存</button>

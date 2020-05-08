@@ -2,6 +2,7 @@
 .Article {
   background-color: #eff2f5;
   width: 100%;
+  min-width: 820px;
 }
 
 .body {
@@ -35,12 +36,13 @@
 
 .body .allcontent .artsearch {
   height: auto;
-  width: 40%;
+  width: 60%;
   display: inline-block;
-  margin-left: 8px;
+  margin-left: 2%;
 }
 
 .body .allcontent .artsearch input {
+  width: 50%;
   height: 25px;
   border: 1px solid #ddd;
   border-radius: 4px;
@@ -52,14 +54,15 @@
   width: 60px;
   height: 27px;
   border-radius: 3px;
-  margin-left: 20px;
+  margin-left: 4%;
 }
 
 .body .allcontent .artcreate {
   width: 100px;
   height: 27px;
   display: inline-block;
-  margin-left: 47%;
+  float: right;
+  margin-right: 4%;
 }
 
 .body .allcontent .artcreate button {

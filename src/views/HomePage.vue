@@ -53,6 +53,7 @@ export default {
 }
 .Nav {
     background-color: #eff2f5;
+    min-width: 820px;
 }
 .homehead {
   width: 100%;

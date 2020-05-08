@@ -1,6 +1,7 @@
 <style scope>
 .referArticle {
   background-color: #eff2f5;
+  min-width: 820px;
 }
 
 .boy {

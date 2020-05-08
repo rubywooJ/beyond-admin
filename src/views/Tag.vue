@@ -1,6 +1,7 @@
 <style scope>
 .Label {
   background-color: #eff2f5;
+  min-width: 820px;
 }
 
 .tagpage {

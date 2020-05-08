@@ -1,6 +1,7 @@
 <style scope>
 .Accessory {
   background-color: #eff2f5;
+  min-width: 820px;
 }
 
 .Accessory .acsimg {
