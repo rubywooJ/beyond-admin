@@ -30,20 +30,21 @@ service.interceptors.request.use(
 service.interceptors.response.use(
     response => {
         let resetTime = sessionStorage.getItem('resetTime');
-        let token = sessionStorage.getItem('Authorization');
+        let token = sessionStorage.getItem('ADMIN-Authorization');
         if (token) {//有没有token
             isRefreshTokenExpired(resetTime);
             if (resetTime < 86400) {//时间少于24小时不刷新
                 if (!window.isReresh) {
                     window.isReresh = true;
-                    let refresh_token = sessionStorage.getItem('refresh_token')
-                    getRefreshToken(refresh_token).then(res => {
-                        window.isReresh = false;
-                        isRefreshTokenExpired(res.data.resetTime);// 重新获取的token有效时间
-                        store.commit('changeLogin', {//vuex中修改相关信息
-                            Authorization: res.data.access_token,
-                            token_type: res.data.token_type,
-                            refresh_token: res.data.refresh_token,
+                    let refresh_token = sessionStorage.getItem('refreshToken')
+                    getRefreshToken()
+                        adminApi.refreshToken(refresh_token).then(res => {
+                            window.isReresh = false;
+                            isRefreshTokenExpired(res.data.resetTime);// 重新获取的token有效时间
+                            store.commit('changeLogin', {//vuex中修改相关信息
+                                'ADMIN-Authorization': res.data.data.access_token,
+                                token_type: res.data.data.token_type,
+                                refresh_token: res.data.data.refresh_token,
                         });
                     }).catch(err => {
                     });
@@ -73,7 +74,7 @@ service.interceptors.response.use(
             } else if (data.status === 401) {
                 store.commit('DelToken');
                 router.replace({
-                    path: '/login',
+                    path: '/Login',
                     query: {
                         redirect: router.currentRoute.fullPath//登录之后跳转到对应页面
                     }
@@ -81,7 +82,7 @@ service.interceptors.response.use(
             } else if (data.status === 403) {
                 store.commit('DelToken');
                 router.replace({
-                    path: '/login',
+                    path: '/Login',
                     query: {
                         redirect: router.currentRoute.fullPath//登录之后跳转到对应页面
                     }

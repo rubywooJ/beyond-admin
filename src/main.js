@@ -18,6 +18,36 @@ window.isReresh = false; //用于判断是否刷新，不能少
 
 Vue.config.productionTip = false;
 
+router.beforeEach((to, from, next) => {
+    console.log(to);
+    console.log(from);
+    if (to.meta.requireAuth) { // 判断该路由是否需要登录权限
+      if(localStorage.getItem('accessToken')){ //判断本地是否存在accessToken
+        next();
+      }else {
+       if(to.path === '/Login'){
+          next();
+        }else {
+          next({
+            path:'/Login'
+          })
+        }
+      }
+    }
+    else {
+      next();
+    }
+    /*如果本地 存在 token 则不允许直接跳转到 登录页面*/
+    if(to.fullPath == "/Login"){
+      if(localStorage.getItem('accessToken')){
+        next({
+          path:from.fullPath
+        });
+      }else {
+        next();
+      }
+    }
+})
 new Vue({
     router,
     render: h => h(App)

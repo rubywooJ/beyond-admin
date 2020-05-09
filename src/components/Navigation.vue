@@ -91,6 +91,7 @@
 .navelm {
   width: 100%;
 }
+/* 媒体查询 */
 @media screen and (max-width: 960px) {
   .logo-col {
     display: none;
@@ -247,6 +248,8 @@ export default {
           adminApi.logout().then(response => {
             this.$router.push("/Login");
           });
+          localStorage.removeItem('accessToken');
+          clearCookie();
           //TODO 退出登录 清空cookie localStorage
         })
         .catch(() => {});

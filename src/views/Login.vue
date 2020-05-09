@@ -16,7 +16,7 @@
 
     .login-body .welcome {
         font-size: 32px;
-        /*color: #ffdab9;*/
+        /* color: #ffdab9; */
         /* 蓝色主题 */
         color: #9370db;
         padding-top: 30px;
@@ -164,8 +164,10 @@
                     .then(response => {
                         //定义一个accessToken接收后台返回的access_token值
                         var accessToken = response.data.data.access_token;
+                        var refreshToken = response.data.data.refresh_token;
                         //localStorage.setItem设置本地数据
                         localStorage.setItem("accessToken", accessToken);
+                        localStorage.setItem("refreshToken", accessToken);
                         //   console.log(response);
                         this.$router.push("HomePage");
                     });
